@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    org.edgexfoundry.service: {{.Values.edgex.app.ui}}
+  name: {{.Values.edgex.app.ui}}
+spec:
+  replicas: {{.Values.edgex.replicas.ui}}
+  selector:
+    matchLabels:
+      org.edgexfoundry.service: {{.Values.edgex.app.ui}}
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        org.edgexfoundry.service: {{.Values.edgex.app.ui}}
+    spec:
+      containers:
+      - name: {{.Values.edgex.app.ui}}
+        image: {{.Values.edgex.image.ui.repository}}:{{.Values.edgex.image.ui.tag}}
+        imagePullPolicy: {{.Values.edgex.image.ui.pullPolicy}}
+        ports:
+        - containerPort: 4000
+        env:
+        - name: Service_Host
+          value: {{.Values.edgex.app.ui}}
+        envFrom:
+        - configMapRef:
+            name: edgex-common-variables
+        readinessProbe:
+          httpGet:
+            path: /api/v1/ping
+            port: 4000
+          initialDelaySeconds: 5
+          periodSeconds: 15
+          successThreshold: 1
+          failureThreshold: 3
+        livenessProbe:
+          httpGet:
+            path: /api/v1/ping
+            port: 4000
+          initialDelaySeconds: 5
+          periodSeconds: 15
+          successThreshold: 1
+          failureThreshold: 3
+      hostname: {{.Values.edgex.app.ui}}
+      restartPolicy: Always
+      nodeSelector:
+        kubernetes.io/arch: 'amd64'       
+status: {}

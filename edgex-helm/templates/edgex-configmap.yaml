@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: edgex-common-variables
+data:
+  EDGEX_SECURITY_SECRET_STORE: "false"
+ # Clients_CoreData_Host: {{.Values.edgex.app.core.data}}
+ # Clients_Data_Host: {{.Values.edgex.app.core.data}}
+ # Clients_Metadata_Host: {{.Values.edgex.app.core.metadata}}
+ # Clients_Command_Host: {{.Values.edgex.app.core.command}}
+ # Clients_Scheduler_Host: {{.Values.edgex.app.support.scheduler}}
+ # Clients_VirtualDevice_Host: {{.Values.edgex.app.device.virtual}}
+ # Databases_Primary_Host: {{.Values.edgex.app.redis}}
+ # Logging_EnableRemote: "false"
+  CLIENTS_COREDATA_HOST: {{.Values.edgex.app.core.data}}
+  CLIENTS_DATA_HOST: {{.Values.edgex.app.core.data}}
+  CLIENTS_METADATA_HOST: {{.Values.edgex.app.core.metadata}}
+  CLIENTS_COMMAND_HOST: {{.Values.edgex.app.core.command}}
+  CLIENTS_SCHEDULER_HOST: {{.Values.edgex.app.support.scheduler}}
+  CLIENTS_VIRTUALDEVICE_HOST: {{.Values.edgex.app.device.virtual}}
+  DATABASES_PRIMARY_HOST: {{.Values.edgex.app.redis}}
+  Service_ServerBindAddr: "0.0.0.0"
+  Logging_EnableRemote: "false"
