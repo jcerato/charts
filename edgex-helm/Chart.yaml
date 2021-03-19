@@ -1,5 +1,10 @@
-
-
+annotations:
+  catalog.cattle.io/certified: rancher
+  catalog.cattle.io/namespace: edgex
+  catalog.cattle.io/release-name: edgex-hanoi
+  catalog.cattle.io/ui-component: edgex
+  catalog.cattle.io/display-name: "EDGEX"
+  catalog.cattle.io/os: linux
 apiVersion: v1 
 name: EdgeX 
 version: 0.1.0 
